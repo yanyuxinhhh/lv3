@@ -1,0 +1,114 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+</head>
+
+<body>
+
+    <ul id="source">
+        <li>北京空气质量：<b>90</b></li>
+        <li>上海空气质量：<b>70</b></li>
+        <li>天津空气质量：<b>80</b></li>
+        <li>广州空气质量：<b>50</b></li>
+        <li>深圳空气质量：<b>40</b></li>
+        <li>福州空气质量：<b>32</b></li>
+        <li>成都空气质量：<b>90</b></li>
+    </ul>
+
+    <ul id="resort">
+    </ul>
+
+    <button id="sort-btn">排序</button>
+
+    <script type="text/javascript">
+        //将li中的数据构成数组
+        // function getData() {
+        //     var data = [];
+        //     var source = document.getElementById('source');
+        //     var li = document.getElementById('li');
+        //     for (var i = 0; i < li.length; i++) {
+        //         data.push(li[i].innerHTML.replace(/(.*)空气质量：<b>([0-9]*)<\/b>/, '$1 $2').split(" "));
+        //     }
+
+
+        //     return data;
+
+        // }
+
+        //把空气质量的数据装进数组里
+        function getData() {
+
+            var data = [];
+
+            var source = document.getElementById('source');
+
+            var rli = source.getElementsByTagName('li');
+
+            for (var i = 0; i < rli.length; i++) {
+
+                data.push(rli[i].innerHTML.replace(/(.*)空气质量：<b>([0-9]*)<\/b>/, '$1 $2').split(" "));
+
+            }
+
+            return data;
+
+        }
+
+
+        //将数组中的空气质量进行排序
+
+
+        function sortAqiData(data) {
+
+            return data.sort(function (a, b) {
+
+                return b[1] - a[1]
+
+            })
+
+        }
+
+
+
+        //将排序后的数组打印
+        function render(data) {
+            //获取resort
+            var resort = document.getElementById('resort');
+            //遍历新方法！参考网络资源
+            data.forEach(function (item, index, array) {
+                //item数组当前项 index数组当前索引
+                resort.innerHTML += '<li>第' + (index + 1) + '名：' + item[0] + '空气质量：' + '<b>' + item[1] + '</b></li>';
+
+            });
+
+        }
+
+
+
+
+        function btnHandle() {
+            var aqiData = getData();
+            //getDate()返回的是data赋值给aqiDate
+            aqiData = sortAqiData(aqiData);//进行排序
+            render(aqiData);//打印
+        }
+
+
+        function init() {
+
+            //注册事件，与按钮绑定
+            var btn = document.getElementById("sort-btn");
+            btn.onclick = btnHandle;
+
+
+        }
+
+        init();
+
+    </script>
+</body>
+
+</html>

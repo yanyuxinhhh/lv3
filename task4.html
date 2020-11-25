@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="input">
+    <button id="left_in">左侧入</button>
+    <button id="right_in">右侧入</button>
+    <button id="left_out">左侧出</button>
+    <button id="right_out">右侧出</button>
+    <div id="box"></div>
+    <script>
+        var Input = document.getElementById('input');
+        var Value = document.getElementById('input').value;
+        var Left_In = document.getElementById('left_in');
+        var Right_In = document.getElementById('right_in');
+        var Left_Out = document.getElementById('left_out');
+        var Right_Out = document.getElementById('right_out');
+        var Box = document.getElementById('box');
+        var Box_Children = document.getElementById('box').children;
+        Input.addEventListener('change', GetValue);//change 事件会在元素数据发生改变时触发，在文本框内表现为 修改value的值且焦点离开即刻触发
+        function GetValue() {
+            Value = Input.value;//取得表单的value值 此步为更新操作
+        }
+
+        Left_In.addEventListener('click', LeftAdd);
+        function LeftAdd() {
+            Box.insertAdjacentHTML("afterBegin", `<span class = "num">${Value}</span>`);
+        }
+        Right_In.addEventListener('click', RightAdd);
+        function RightAdd() {
+            Box.insertAdjacentHTML("beforeEnd", `<span class = "num">${Value}</span>`);
+        }
+        Left_Out.addEventListener('click', LeftOut);
+        function LeftOut() {
+            Box.removeChild(Box_Children[0]);
+        }
+        Right_Out.addEventListener('click', RightOut);
+        function RightOut() {
+            Box.removeChild(Box_Children[Box_Children.length - 1]);
+        }
+
+    </script>
+</body>
+
+</html>

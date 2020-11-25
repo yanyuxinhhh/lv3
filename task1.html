@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>任务二</title>
+</head>
+
+<body>
+    <h3>污染城市列表</h3>
+    <ul id="aqu_list">
+    </ul>
+    <script type="text/javascript">
+        var aquData = [
+            ["北京", 90],
+            ["上海", 50],
+            ["福州", 10],
+            ["广州", 50],
+            ["成都", 90],
+            ["西安", 100]
+        ];
+        function get_aquData() {
+
+            var j = 0;
+            var newArr = [];
+            for (var i = 0; i < aquData.length; i++) {
+                if (aquData[i][1] > 60) {
+                    newArr[j] = aquData[i];
+                    j++;
+                }
+            }
+
+            //将得出的数组进行排序
+            newArr.sort(function (x, y) { return y[1] - x[1]; });
+            var ranking = ["1", "2", "3", "4", "5", "6"];
+
+
+            for (var k = 0; k < newArr.length; k++) {
+                var new_ul = document.getElementById("aqu_list");
+                var new_li = document.createElement("li");
+                //显示文字
+                new_li.innerHTML = ("第" + ranking[k] + "名：" + newArr[k] + "<br/>");
+                new_ul.appendChild(new_li);
+            }
+        }
+        get_aquData();
+    </script>
+</body>
+
+</html>

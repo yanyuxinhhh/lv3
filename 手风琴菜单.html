@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul class="wapper">
+        <li class="list">奶茶
+            <ul class="two">
+                <li>芝芝莓莓</li>
+                <li>芋泥波波奶茶</li>
+                <li>红豆布丁奶茶</li>
+                <li>黑糖珍珠奶茶</li>
+            </ul>
+        </li>
+
+        <li class="list">果茶
+            <ul class="two">
+                <li>森林莓果</li>
+                <li>柠檬茶</li>
+                <li>蜜桃四季春</li>
+            </ul>
+        </li>
+        <li class="list">咖啡
+            <ul class="two">
+                <li>拿铁</li>
+                <li>卡布奇诺</li>
+            </ul>
+        </li>
+        <li class="list">牛奶
+            <ul ul class="two">
+                <li>蜂蜜牛奶</li>
+                <li>草莓牛奶</li>
+                <li>巧克力牛奶</li>
+                <li>热牛奶</li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+
+        var list = document.getElementsByClassName('list');  //获取每个第一层菜单第一项
+        var two = document.getElementsByClassName('two');   //获取每个第二级菜单
+        for (let i = 0; i < list.length; i++) {      //遍历第一层菜单的每一项
+            two[i].style.display = 'none';     //让第二级菜单进行一个隐藏
+            list[i].onclick = function () {      //给每个第一层菜单绑定一个点击事件
+                //如果当前的这个第二级菜单的display为block也就是显示状态的话；
+                if (two[i].style.display == 'block') {
+                    two[i].style.display = 'none';   //让其进行隐藏
+
+                    return;
+                }
+                this.children[0].style.display = 'block';  //让当前点击的这个第一级菜单下的二级菜单显示出来
+
+            }
+        }
+    </script>
+</body>
+
+</html>

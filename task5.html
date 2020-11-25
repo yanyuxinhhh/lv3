@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #display {
+        display: inline-block;
+        margin: 10px 5px;
+        padding: 0px 10px;
+        background-color: red;
+
+
+    }
+</style>
+
+<body>
+    <input id="input">
+    <button id="left_in">左侧入</button>
+    <button id="right_in">右侧入</button>
+    <button id="left_out">左侧出</button>
+    <button id="right_out">右侧出</button>
+    <!-- 新增排序按钮 -->
+    <button id="sort">冒泡排序</button>
+    <div id="box"></div>
+    <div id="display"></div>
+    <script>
+        var Input = document.getElementById('input');
+        var Value = document.getElementById('input').value;
+        var Value_C = document.getElementById('input').value.children;
+        var Left_In = document.getElementById('left_in');
+        var Right_In = document.getElementById('right_in');
+        var Left_Out = document.getElementById('left_out');
+        var Right_Out = document.getElementById('right_out');
+        var Box = document.getElementById('box');
+        var Box_Children = document.getElementById('box').children;
+        var Display = document.getElementById('display');
+        Input.addEventListener('change', GetValue);//change 事件会在元素数据发生改变时触发，在文本框内表现为 修改value的值且焦点离开即刻触发
+        function GetValue() {
+            Value = Input.value;//取得表单的value值 此步为更新操作
+        }
+
+        Left_In.addEventListener('click', LeftAdd);
+        function LeftAdd() {
+            Box.insertAdjacentHTML("afterBegin", `<span class = "num">${Value} </span>`);
+
+            check(Value);
+
+            Display.style.height = Value * 3 + 'px';
+            Clear(Input);
+            if (Value.length > 50) {
+                alert('元素数量最多限制为50个');
+            }
+
+
+        }
+
+
+
+
+        Right_In.addEventListener('click', RightAdd);
+        function RightAdd() {
+            Box.insertAdjacentHTML("beforeEnd", `<span class = "num">${Value} </span>`);
+            check(Value);
+            Clear(Input);
+            Display.style.height = Value * 3 + 'px';
+
+            if (Value.length > 50) {
+                alert('元素数量最多限制为50个')
+            }
+        }
+        Left_Out.addEventListener('click', LeftOut);
+        function LeftOut() {
+            Box.removeChild(Box_Children[0]);
+        }
+        Right_Out.addEventListener('click', RightOut);
+        function RightOut() {
+            Box.removeChild(Box_Children[Box_Children.length - 1]);
+        }
+
+        function check(value) {
+            reg = /^-?\d+\.?\d*$/; //实数的正则表达式
+            if (value == ' ') { alert('请输入数字'); }
+
+            if (!reg.test(value)) {
+                alert('只能输入数字');
+            }
+            else if (reg.test(value) && (value < 1 || value > 100)) {
+                alert('只能输入范围为10-100的数字');
+            }
+            else {
+                return true;
+            }
+
+        }
+
+
+
+
+
+
+        // 让表单里的值删除
+        function Clear(input) {
+            input.value = ' ';
+        }
+
+    </script>
+</body>
+
+</html>
